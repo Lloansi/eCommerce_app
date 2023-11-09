@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@color/vhost_orange" /> <!-- Color cuando se pulsa -->
+    <item android:drawable="@color/grayMate" /> <!-- Color por defecto -->
+</selector>
+

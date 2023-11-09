@@ -1,0 +1,17 @@
+package com.example.ecommercemobile.data.network
+
+import com.example.ecommercemobile.data.model.Cart
+import com.example.ecommercemobile.data.model.Order
+import com.example.ecommercemobile.data.model.OrderState
+
+interface RelationService {
+    suspend fun getOrders(userID: Int): List<Order>
+    suspend fun addOrder(order: Order): Boolean
+    suspend fun putOrder(userID: Int, orderID: Int, state: OrderState): Boolean
+
+    suspend fun getCart(userID: Int): Cart?
+    suspend fun createCart(cart: Cart): Boolean
+    suspend fun updateCart(userID: Int, productList: List<String>): Boolean
+    suspend fun deleteCart(userID: Int): Boolean
+
+}
