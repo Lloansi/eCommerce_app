@@ -93,7 +93,10 @@ class UserViewModel @Inject constructor(
 
     fun putUserPicture(imageFile: File) {
         CoroutineScope(Dispatchers.IO).launch {
-            repository.putUserPicture(MultipartBody.Part.createFormData("image", imageFile.name, imageFile.asRequestBody("image/*".toMediaTypeOrNull())))
+            val result = repository.putUserPicture(MultipartBody.Part.createFormData("image", imageFile.name, imageFile.asRequestBody("image/*".toMediaTypeOrNull())))
+            if (result is AuthResult.Authorized) {
+                getUserImage(user.value!!.userID)
+            }
         }
     }
 

@@ -64,6 +64,7 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.profileIV.setImageBitmap(userViewModel.userImage.value)
+        binding.emailET.editText!!.setText(userViewModel.user.value?.userEmail)
 
         binding.photoBT.setOnClickListener{
             if(ContextCompat.checkSelfPermission(requireContext(),
