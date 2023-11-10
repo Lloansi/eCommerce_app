@@ -24,7 +24,7 @@
 
 
 ## 📼Demo
-[https://gyazo.com/eecfa15d223040bcd53692544e4cbbe6](https://imgur.com/a/vUkoyzG)
+[Video Demo App](https://imgur.com/a/vUkoyzG)
 
 
 ## 🙋Frequently Asked Questions (FAQ)
