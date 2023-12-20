@@ -135,11 +135,34 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/SearchView_linearLayout"
+        android:layout_marginTop="-30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <com.google.android.material.search.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Buscar..."
+            app:layout_anchor="@id/search_bar">
+            <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+        </com.google.android.material.search.SearchView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+
         android:id="@+id/section_recommendedItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintBottom_toTopOf="@+id/section_popularItems"
+        app:layout_constraintTop_toBottomOf="@+id/SearchView_linearLayout">
 
         <LinearLayout
             android:id="@+id/linearLayout_title_recommended"
@@ -157,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginStart="14sp"
-                    android:text="Recommended"
+                    android:text="@string/recommended"
                     android:textColor="@color/grayMate"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -168,7 +191,7 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="14sp"
                     android:gravity="end"
-                    android:text="See all"
+                    android:text="@string/see_all"
                     android:textColor="@color/vhost_orange"
                     android:textSize="16sp" />
 
@@ -178,12 +201,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_recommended"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="165sp"
             android:layout_gravity="center"
             android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:scrollbars="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -194,58 +217,58 @@
 
 
     <LinearLayout
-            android:id="@+id/section_popularItems"
+        android:id="@+id/section_popularItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout_title_popular"
+            android:padding="4sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/linearLayout_title_popular"
-                android:padding="4sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="14sp"
+                    android:text="@string/popular"
+                    android:textColor="@color/grayMate"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="start"
-                        android:layout_marginStart="14sp"
-                        android:text="Popular"
-                        android:textColor="@color/grayMate"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="14sp"
-                        android:gravity="end"
-                        android:text="See all"
-                        android:textColor="@color/vhost_orange"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="14sp"
+                    android:gravity="end"
+                    android:text="@string/see_all"
+                    android:textColor="@color/vhost_orange"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_gravity="center"
-                android:id="@+id/recyclerview_popular"
-                android:layout_width="match_parent"
-                android:layout_height="275sp"
-                tools:listitem="@layout/popular_item"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout_title_popular" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_gravity="center"
+            android:id="@+id/recyclerview_popular"
+            android:layout_width="match_parent"
+            android:layout_height="275sp"
+            tools:listitem="@layout/item_product"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_title_popular" />
 
     </LinearLayout>
 

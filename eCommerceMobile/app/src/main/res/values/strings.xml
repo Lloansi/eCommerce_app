@@ -37,8 +37,8 @@
     <string name="login">LOGIN</string>
     <string name="register">Register</string>
     <string name="no_tiene_cuenta">¿No tiene cuenta?</string>
-    <string name="password">Password ...</string>
-    <string name="email">Email ...</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
     <string name="image_from_product">Image from product</string>
     <string name="_0_99">0.99€</string>
     <string name="month">/month</string>
@@ -52,4 +52,30 @@
     <string name="features">Features</string>
     <string name="description">Description</string>
     <string name="rating">Rating</string>
+    <string name="search_hint">Search ...</string>
+    <string name="filter">Filter</string>
+    <string name="recommended">Recommended</string>
+    <string name="see_all">See all</string>
+    <string name="popular">Popular</string>
+    <string name="location">Location</string>
+    <string name="buscar">Search</string>
+    <string name="paypal_amplitude_dev_key">dev key</string>
+    <string name="paypal_amplitude_prod_key">prod key</string>
+    <string name="paypal_checkout_user_agreement_cta_pay_now">checkout user agreement </string>
+    <string name="paypal_overcapture_expanded_details_long_text">overcapture </string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="log_in">Log In</string>
+    <string name="i5_8500">I5-8500</string>
+    <string name="_10gb">10GB</string>
+    <string name="_2gb">2GB</string>
+    <string name="ssd_storage">• SSD Storage: </string>
+    <string name="ram">• RAM: </string>
+    <string name="disco">• DISCO: </string>
+    <string name="cpu">• CPU: </string>
+    <string name="ddos_protection">• DDoS Protection: </string>
+    <string name="players">• Players: </string>
+    <string name="_3_6">3-6</string>
+    <string name="products_related">Products Related</string>
+    <string name="true_string">True</string>
+
 </resources>

@@ -8,10 +8,9 @@
     tools:context=".ui.view.SignUpFragment">
 
     <ImageView
-        android:layout_marginTop="5dp"
         android:id="@+id/logoIV"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,13 +19,12 @@
         />
 
     <TextView
-        android:layout_margin="5dp"
         android:id="@+id/createAccountTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_an_account"
         android:textColor="@color/white"
-        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+        android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@+id/logoIV"
         app:layout_constraintBottom_toTopOf="@id/emailET"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +141,7 @@
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.11"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Repeat password"
+        android:hint="@string/repeat_password"
         app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
@@ -178,9 +176,8 @@
     <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/signUpBT"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
         android:text="@string/sign_up"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:layout_marginTop="5dp"
         android:textColor="@color/white"
         android:background="@drawable/round_button"
@@ -228,7 +225,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/loginWithGoogleIV"
-        android:layout_width="45dp"
+        android:layout_width="30dp"
         android:layout_height="45dp"
         app:civ_circle_background_color="@color/white"
         android:src="@drawable/icon_google"
@@ -259,7 +256,6 @@
         android:text="@string/sign_in_underline"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/loginWithGoogleIV"
         app:layout_constraintStart_toEndOf="@id/signin1TV"

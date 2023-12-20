@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.ecommercemobile.R
 import com.example.ecommercemobile.data.model.Product
 import com.example.ecommercemobile.databinding.ItemCartBinding
@@ -46,7 +48,13 @@ class CartAdapter(private val productList: List<Product>,
             binding.productTV.text = product.name
             binding.priceTV.text = "${product.price}${context.getString(R.string.euro)}"
             binding.categoryChip.text = product.category
-            binding.quantityET.setText(productList.count { it.idProduct == product.idProduct }.toString())
+            binding.quantityET.setText(productList.count { it.id == product.id }.toString())
+            Glide.with(context)
+                .load("http://10.0.2.2:8000/api/uploads/images/${product.image}")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .circleCrop()
+                .into(binding.productIV)
         }
     }
     override fun getItemCount(): Int {

@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -82,11 +85,24 @@
         android:id="@+id/detailFragment"
         android:name="com.example.ecommercemobile.ui.view.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="productID"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.example.ecommercemobile.ui.view.OrderDetailFragment"
         android:label="fragment_order_detail"
         tools:layout="@layout/fragment_order_detail" >
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.ecommercemobile.ui.view.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

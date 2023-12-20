@@ -1,7 +1,7 @@
 package com.example.ecommercemobile.ui.view.adapters.interfaces
 
-import com.example.ecommercemobile.data.model.Order
+import com.example.ecommercemobile.data.model.OrderClient
 
 interface OnClickListenerOrder {
-    fun onOrderClick(order: Order)
+    fun onOrderClick(orderClient: OrderClient)
 }

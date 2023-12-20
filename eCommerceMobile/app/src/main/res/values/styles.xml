@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Add your other styling attributes here -->
+
+        <!-- Style for the SearchView -->
+        <item name="android:searchViewStyle">@style/MySearchViewStyle</item>
+    </style>
+
+    <!-- Style for the SearchView -->
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Customize the close (X) button -->
+        <item name="android:closeIcon">@drawable/ic_close</item>
+
+        <!-- Customize the search icon -->
+        <item name="android:searchIcon">@drawable/ic_search</item>
+        <item name="android:iconifiedByDefault">false</item>
+
+        <!-- Customize the text appearance -->
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:queryHint">@string/search_hint</item>
+
+        <!-- Add more customization as needed -->
+    </style>
+
+</resources>
+
+

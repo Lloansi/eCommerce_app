@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -31,7 +32,6 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         userViewModel.user.observe(viewLifecycleOwner) { user ->
-            println("User del login: $user")
             if(user!=null) {
                 userViewModel.getUserImage(user.userID)
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
@@ -50,6 +50,16 @@ class LoginFragment : Fragment() {
                 }
                 is AuthResult.Unauthorized -> {
                     println("Unauthorized")
+                    binding.loginBT.revertAnimation()
+                }
+                is AuthResult.ServerUnavailable -> {
+                    println("ServerUnavailable")
+                    Toast.makeText(requireContext(), "Server Unavailable", Toast.LENGTH_SHORT).show()
+                    binding.loginBT.revertAnimation()
+                }
+                is AuthResult.NoConnection -> {
+                    println("NoConnection")
+                    Toast.makeText(requireContext(), "No connection", Toast.LENGTH_SHORT).show()
                     binding.loginBT.revertAnimation()
                 }
                 is AuthResult.UnknownError -> {

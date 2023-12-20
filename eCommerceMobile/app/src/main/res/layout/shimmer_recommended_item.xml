@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="5sp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:padding="4sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_margin="4sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/img_recommended"
+                    android:contentDescription="@string/image_from_product"
+                    android:layout_width="100sp"
+                    android:layout_height="70sp"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@color/lightGrey" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_marginLeft="4sp"
+                android:layout_marginRight="4sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <View
+                    android:id="@+id/category_recommended"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="50dp"
+                    android:layout_height="7dp"
+                    />
+
+                <LinearLayout
+                    android:layout_marginStart="29sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:contentDescription="@string/star_from_rating"
+                        android:layout_width="11sp"
+                        android:layout_height="11sp"
+                        android:layout_marginEnd="1sp"
+                        android:layout_gravity="center"
+                        app:tint="@color/lightGrey"
+                        android:src="@drawable/ic_star_rounded" />
+
+                    <View
+                        android:layout_gravity="center"
+                        android:background="@color/lightGrey"
+                        android:textColor="@color/lightGrey"
+                        android:layout_width="9dp"
+                        android:layout_height="7dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="4sp"
+                android:layout_marginRight="4sp"
+                android:id="@+id/nameProduct_recommended"
+                android:background="@color/lightGrey"
+                android:textColor="@color/lightGrey"
+                android:layout_width="80dp"
+                android:layout_height="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:padding="2sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginLeft="4sp"
+                android:layout_marginRight="4sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/name_popular">
+
+                <ImageView
+                    android:contentDescription="@string/icon_from_location"
+                    android:id="@+id/location_image_recommended"
+                    android:layout_width="13sp"
+                    android:layout_height="13sp"
+                    android:padding="1sp"
+                    app:tint="@color/lightGrey"
+                    android:src="@drawable/ic_baseline_location"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/name_popular" />
+
+                <View
+                    android:id="@+id/location_recommended"
+                    android:layout_gravity="center"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="40dp"
+                    android:layout_height="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/location_image_popular"
+                    app:layout_constraintTop_toBottomOf="@+id/name_popular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2sp"
+                android:layout_marginLeft="4sp"
+                android:layout_marginRight="4sp"
+                android:layout_marginBottom="4sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+                <View
+                    android:id="@+id/price_recommended"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="20dp"
+                    android:layout_height="11dp" />
+
+                <TextView
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/price_expiration_recommended"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="30dp"
+                    android:layout_height="11dp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

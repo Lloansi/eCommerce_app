@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
         ))
         setupActionBarWithNavController(navController, appBarConfiguration)*/
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment || destination.id == R.id.detailFragment) {
-                bottomNavigationView.visibility = View.GONE
-            } else {
+            if (destination.id == R.id.homeFragment || destination.id == R.id.profileFragment || destination.id == R.id.cartFragment) {
                 bottomNavigationView.visibility = View.VISIBLE
+            } else {
+                bottomNavigationView.visibility = View.GONE
             }
         }
 

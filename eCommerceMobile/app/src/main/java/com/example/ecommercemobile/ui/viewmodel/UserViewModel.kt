@@ -49,6 +49,13 @@ class UserViewModel @Inject constructor(
         }
     }
 
+    fun validateEmail(email:String) {
+        viewModelScope.launch {
+            repository.validateEmail(email)
+        }
+
+    }
+
     fun authenticate() {
         viewModelScope.launch {
             val result = repository.authenticate()
@@ -111,12 +118,10 @@ class UserViewModel @Inject constructor(
         return if (!emailPattern.matches(email)) {
             emailET.isErrorEnabled = true
             emailET.error = "Invalid email"
-            println("email valid false")
             false
         } else {
             emailET.isErrorEnabled = false
             emailET.error = null
-            println("email valid true")
             true
         }
     }

@@ -23,7 +23,8 @@
         android:id="@+id/loginTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log In"
+        android:textSize="30sp"
+        android:text="@string/log_in"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
         app:layout_constraintTop_toBottomOf="@+id/logoIV"
@@ -106,7 +107,6 @@
 
     <TextView
         android:id="@+id/forgotPassTV"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
         android:id="@+id/loginBT"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Log in"
+        android:text="@string/log_in"
         android:background="@drawable/round_button"
         app:spinning_bar_color="@color/white"
         android:layout_marginTop="5dp"
@@ -172,7 +172,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/loginWithGoogleIV"
-        android:layout_width="45dp"
+        android:layout_width="30dp"
         app:civ_border_color="@color/white"
         app:civ_circle_background_color="@color/white"
         android:layout_height="45dp"

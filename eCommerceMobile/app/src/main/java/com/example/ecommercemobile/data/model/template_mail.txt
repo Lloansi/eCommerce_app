@@ -1,0 +1,17 @@
+<html>
+<body>
+<p>Thank you for registering with our application! To complete the registration process, please click on the confirmation link below:</p>
+<p><button type=\"submit\" onclick="enviarCorreo()" style=\"display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px;\">Confirm Registration</a></p>
+<p>If the confirmation button does not work, you can also copy and paste the following link into your browser:</p>
+<p></p>
+<p>Thank you,<br>The eCommerceAPP Team</p>
+</body>
+</html>
+<script>
+        function enviarCorreo() {
+            var url = '{0}';
+            fetch(url, {
+                method: 'PATCH'
+            })
+        }
+</script>

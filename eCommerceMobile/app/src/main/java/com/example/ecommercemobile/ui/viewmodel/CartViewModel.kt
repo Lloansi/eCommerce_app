@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecommercemobile.data.RelationRepository
 import com.example.ecommercemobile.data.model.Cart
-import com.example.ecommercemobile.data.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,14 +14,12 @@ class CartViewModel @Inject constructor(
     private val repository: RelationRepository): ViewModel() {
 
     var vmCart = MutableLiveData<Cart?>()
-    var productList = mutableListOf<Product>()
-
 
     // If the user has a cart, get it. Otherwise, create a new cart
     fun getCart(userID: Int) {
         viewModelScope.launch {
             val result = repository.getCart(userID)
-            if (result != null) {
+            if (result!!.idCart != 0) {
                 vmCart.postValue(result)
             } else {
                 createCart(Cart(0, userID, emptyList()))
@@ -30,15 +27,12 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    // This function is called when the user exits the app or adds a item to a cart
-    // and the viewModel Cart is null
+    // This function is called when the user exits the app or adds a item to a cart and the viewModel Cart is null
     fun createCart(cart: Cart) {
         viewModelScope.launch {
-            if (vmCart.value != null){
-                val result = repository.createCart(cart)
-                if (result) {
-                    getCart(cart.idUser)
-                }
+            val result = repository.createCart(cart)
+            if (result) {
+                getCart(cart.idUser)
             }
         }
     }
@@ -54,6 +48,7 @@ class CartViewModel @Inject constructor(
             }
         }
     }
+
     // This function is called when the user makes the purchase, the cart is deleted
     // and a new order is created. Also call the getCart function to create a new empty cart
     fun deleteCart(userID: Int) {

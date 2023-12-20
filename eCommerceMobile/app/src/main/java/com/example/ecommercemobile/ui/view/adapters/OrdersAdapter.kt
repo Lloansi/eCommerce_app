@@ -4,12 +4,14 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ecommercemobile.data.model.Order
+import com.example.ecommercemobile.data.model.OrderClient
+import com.example.ecommercemobile.data.model.Product
 import com.example.ecommercemobile.databinding.ItemOrdersBinding
 import com.example.ecommercemobile.ui.view.adapters.interfaces.OnClickListenerOrder
 import com.example.ecommercemobile.utils.ExtensionFunctions.round
 
-class OrdersAdapter(private val orderList: List<Order>,
+class OrdersAdapter(private val orderClientList: List<OrderClient>,
+                    private val productList: List<Product>,
                     val listener: OnClickListenerOrder,
    ): RecyclerView.Adapter<OrdersAdapter.ViewHolder>(){
 
@@ -17,9 +19,9 @@ class OrdersAdapter(private val orderList: List<Order>,
         val binding = ItemOrdersBinding.bind(view)
 
 
-        fun setListener(order: Order) {
+        fun setListener(orderClient: OrderClient) {
             binding.root.setOnClickListener {
-                listener.onOrderClick(order)
+                listener.onOrderClick(orderClient)
             }
         }
     }
@@ -31,21 +33,21 @@ class OrdersAdapter(private val orderList: List<Order>,
     }
 
     override fun onBindViewHolder(holder: OrdersAdapter.ViewHolder, position: Int) {
-        val order = orderList[position]
+        val order = orderClientList[position]
 
         with(holder) {
             setListener(order)
-            binding.dateOrderedTV.text = order.orderDate.toString()
+            binding.dateOrderedTV.text = order.orderDate
             binding.totalPriceTV.text = order.totalPrice.round(2).toString()+"€"
             binding.orderNumberTV.text = order.idOrder.toString()
             // faltan las fotos
-            binding.product1TV.text = order.productList[0].name
-            binding.price1TV.text = order.productList[0].price.round(2).toString()+"€"
-            binding.categoryChip.text = order.productList[0].category
+            binding.product1TV.text = productList[0].name
+            binding.price1TV.text = productList[0].price.round(2).toString()+"€"
+            binding.categoryChip.text = productList[0].category
             if (order.productList.size != 1){
-                binding.product2TV.text = order.productList[1].name
-                binding.price2TV.text = order.productList[1].price.round(2).toString()+"€"
-                binding.category2Chip.text = order.productList[1].category
+                binding.product2TV.text = productList[1].name
+                binding.price2TV.text = productList[1].price.round(2).toString()+"€"
+                binding.category2Chip.text = productList[1].category
             } else {
                 binding.product2TV.visibility = View.GONE
                 binding.price2TV.visibility = View.GONE
@@ -57,7 +59,7 @@ class OrdersAdapter(private val orderList: List<Order>,
     }
 
     override fun getItemCount(): Int {
-        return orderList.size
+        return orderClientList.size
     }
 
 }

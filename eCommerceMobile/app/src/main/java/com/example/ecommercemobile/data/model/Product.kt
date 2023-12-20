@@ -2,12 +2,13 @@ package com.example.ecommercemobile.data.model
 
 
 data class Product(
-    val idProduct: Int,
+    val id: String,
     var name: String,
     var image: String,
     var category: String,
     var price: Double,
-    var location: Location,
+    var location: String,
     var specs: Specs,
-    var stock: Int
+    var stock: Int,
+    var timesBought: Int
 )

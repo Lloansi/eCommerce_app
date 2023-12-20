@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="5sp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <com.google.android.material.card.MaterialCardView
+        android:padding="4sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_margin="4sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <View
+                    android:id="@+id/img_popular"
+                    android:contentDescription="@string/image_from_product"
+                    android:layout_width="120sp"
+                    android:layout_height="120sp"
+                    android:background="@color/lightGrey"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
+                    android:scaleType="centerCrop"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_margin="4sp"
+                android:orientation="vertical"
+                android:layout_width="120sp"
+                android:layout_height="120sp">
+
+                <View
+                    android:id="@+id/category_popular"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="90dp"
+                    android:layout_height="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/name_popular"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="4sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/category_popular" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30sp"
+                    android:orientation="horizontal"
+                    android:padding="2sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/name_popular">
+
+                    <ImageView
+                        android:contentDescription="@string/icon_from_location"
+                        android:id="@+id/location_image_popular"
+                        android:padding="1sp"
+                        android:layout_width="18sp"
+                        android:layout_height="18sp"
+                        app:tint="@color/lightGrey"
+                        android:src="@drawable/ic_baseline_location"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintTop_toBottomOf="@+id/name_popular" />
+
+                    <View
+                        android:id="@+id/location_popular"
+                        android:layout_gravity="center"
+                        android:background="@color/lightGrey"
+                        android:layout_width="130dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/location_image_popular"
+                        app:layout_constraintTop_toBottomOf="@+id/name_popular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+                    <View
+                        android:id="@+id/price_popular"
+                        android:background="@color/lightGrey"
+                        android:textColor="@color/lightGrey"
+                        android:layout_width="40dp"
+                        android:layout_height="14dp" />
+
+                    <View
+                        android:layout_marginStart="4dp"
+                        android:id="@+id/price_expiration_popular"
+                        android:background="@color/lightGrey"
+                        android:textColor="@color/lightGrey"
+                        android:layout_width="40dp"
+                        android:layout_height="14dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="top"
+                android:layout_marginTop="4sp"
+                android:layout_marginStart="75sp"
+                android:layout_marginEnd="4sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:contentDescription="@string/star_from_rating"
+                    android:layout_gravity="center"
+                    android:layout_width="14sp"
+                    android:layout_height="14sp"
+                    android:layout_marginEnd="2sp"
+                    app:tint="@color/lightGrey"
+                    android:src="@drawable/ic_star_rounded" />
+
+                <View
+                    android:layout_gravity="center"
+                    android:background="@color/lightGrey"
+                    android:textColor="@color/lightGrey"
+                    android:layout_width="15dp"
+                    android:layout_height="11dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

@@ -1,55 +1,96 @@
 package com.example.ecommercemobile.data
 
-import com.example.ecommercemobile.data.model.PopularProduct
-import com.example.ecommercemobile.data.model.RecommendedProduct
-import com.example.ecommercemobile.data.network.PopularService
-import com.example.ecommercemobile.data.network.RecommendedService
+import android.util.Log
+import com.example.ecommercemobile.data.model.Product
+import com.example.ecommercemobile.data.network.ApiProducts
+import com.example.ecommercemobile.data.network.ProductsService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import javax.inject.Inject
 
-class RepositoryProducts (private val popularProducts: PopularService, private val recommendedProducts: RecommendedService) {
-
-    //POPULAR
-    suspend fun getAllPopularProducts(): List<PopularProduct>?{
-        val response =popularProducts.getAllPopularProducts()
-        return response
+class RepositoryProducts @Inject constructor(
+    private val api: ApiProducts,
+    ): ProductsService {
+    override suspend fun getAllProducts(): List<Product>? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = api.getAllProducts()
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    null
+                }
+            } catch (e: SocketTimeoutException) {
+                // Handle timeout exception (Server took too long to respond)
+                Log.e("Connection timeout: Server is not responding",e.message.toString())
+                null
+            } catch (e: UnknownHostException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            } catch (e: ConnectException) {
+                // Handle connection exception (Server unreachable)
+                Log.e("Server unreachable",e.message.toString())
+                null
+            } catch (e: IOException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            }
+        }
     }
 
-    suspend fun getPopularProductById(): PopularProduct{
-        TODO()
+    override suspend fun getProductById(id: String): Product? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = api.getProductById(id)
+                response.body()
+            } catch (e: IOException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            } catch (e: SocketTimeoutException) {
+                // Handle timeout exception (Server took too long to respond)
+                Log.e("Connection timeout: Server is not responding",e.message.toString())
+                null
+            } catch (e: UnknownHostException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            } catch (e: ConnectException) {
+                // Handle connection exception (Server unreachable)
+                Log.e("Server unreachable",e.message.toString())
+                null
+            } catch (e: IOException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            }
+        }
     }
 
-    suspend fun addPopularProduct(): Boolean?{
-        TODO()
+    override suspend fun getProductsById(idList: List<String>): List<Product>? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = api.getProductsById(idList)
+                response.body()
+            } catch (e: IOException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            } catch (e: SocketTimeoutException) {
+                // Handle timeout exception (Server took too long to respond)
+                Log.e("Connection timeout: Server is not responding",e.message.toString())
+                null
+            } catch (e: UnknownHostException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            } catch (e: ConnectException) {
+                // Handle connection exception (Server unreachable)
+                Log.e("Server unreachable",e.message.toString())
+                null
+            } catch (e: IOException) {
+                Log.e("NoConnectivityException", e.message.toString())
+                null
+            }
+        }
     }
-
-    suspend fun deletePopularProduct(): Boolean?{
-        TODO()
-    }
-
-    suspend fun updatePopularProduct(): Boolean?{
-        TODO()
-    }
-
-    //RECOMMENDED
-    suspend fun getAllRecommendedProducts(): List<RecommendedProduct>?{
-        val response = recommendedProducts.getAllRecommendedProducts()
-        return response
-    }
-
-    suspend fun getRecommendedProductById(): RecommendedProduct{
-        TODO()
-    }
-
-    suspend fun addRecommendedProduct(): Boolean?{
-        TODO()
-    }
-
-    suspend fun deleteRecommendedProduct(): Boolean?{
-        TODO()
-    }
-
-    suspend fun updateRecommendedProduct(): Boolean?{
-        TODO()
-    }
-
-
 }

@@ -8,13 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.ecommercemobile.R
+import com.example.ecommercemobile.data.model.Product
 import com.example.ecommercemobile.databinding.RecommendedItemBinding
-import com.example.ecommercemobile.data.model.RecommendedProduct
+import com.example.ecommercemobile.ui.view.adapters.interfaces.OnClickListenerProduct
 
-class AdapterRecommended(private val recommendItems: List<RecommendedProduct>) :  RecyclerView.Adapter<AdapterRecommended.ViewHolder>()  {
+class ProductsVerticalAdapter(
+    private val productList: List<Product>,
+    val listener : OnClickListenerProduct
+) :  RecyclerView.Adapter<ProductsVerticalAdapter.ViewHolder>()  {
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val binding = RecommendedItemBinding.bind(view)
+        fun setListener(product: Product) {
+            binding.root.setOnClickListener {
+                listener.onClickProduct(product)
+            }
+
+        }
     }
 
     private lateinit var context: Context
@@ -25,23 +35,30 @@ class AdapterRecommended(private val recommendItems: List<RecommendedProduct>) :
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AdapterRecommended.ViewHolder, position: Int) {
-        val popularItem = recommendItems[position]
+    override fun onBindViewHolder(holder: ProductsVerticalAdapter.ViewHolder, position: Int) {
+        val product = productList[position]
         with(holder){
-            binding.nameProductRecommended.text = popularItem.name
-            binding.categoryRecommended.text = popularItem.category
+            setListener(product)
+            println(product.id)
+            binding.nameProductRecommended.text = product.name
+            binding.categoryRecommended.text = product.category
+            binding.locationRecommended.text = product.location
+            binding.priceRecommended.text = product.price.toString()
+
 
             Glide.with(context)
-                .load(""/*Aquí anirá la carga de la imatge de Django , si fos per postgres, seria tipus: recommendeItems.recommendedImg (on guardariem la url d'on està la imatge)*/)
+                .load("http://10.0.2.2:8000/api/uploads/images/${product.image}")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .circleCrop()
                 .into(binding.imgRecommended)
+
+
         }
     }
 
     override fun getItemCount(): Int {
-        return recommendItems.size
+        return productList.size
     }
 
 

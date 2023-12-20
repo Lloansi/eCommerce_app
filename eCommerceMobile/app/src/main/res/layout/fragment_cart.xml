@@ -30,6 +30,28 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:listitem="@layout/item_cart" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/shimmer_item_cart"/>
+            <include layout="@layout/shimmer_item_cart"/>
+            <include layout="@layout/shimmer_item_cart"/>
+            <include layout="@layout/shimmer_item_cart"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/totalTV"
         android:text="Total: $0.00"
@@ -44,20 +66,52 @@
         app:layout_constraintBottom_toTopOf="@id/checkoutBT"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressImageButton
+    <TextView
+        android:id="@+id/emptyCartTV"
+        android:text="Your cart is empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/checkoutBT"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
         android:text="@string/checkout"
         android:background="@drawable/round_button"
+        app:spinning_bar_color="@color/white"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintTop_toBottomOf="@+id/totalTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.85" />
+
+    <com.paypal.checkout.paymentbutton.PaymentButtonContainer
+
+        android:id="@+id/payment_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:paypal_credit_button_size="large"
+        app:layout_constraintTop_toBottomOf="@+id/totalTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.85"
+
+        app:paypal_button_color="silver"
+        app:paypal_button_label="pay"
+        app:paypal_button_shape="rectangle"
+        app:paypal_button_size="large"
+        app:paypal_button_enabled="true" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

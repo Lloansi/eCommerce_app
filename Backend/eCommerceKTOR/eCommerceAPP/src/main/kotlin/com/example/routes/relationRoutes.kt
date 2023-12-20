@@ -18,10 +18,9 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.relationRoutes() {
+fun Route.relationRoutes(userDao: UserImpl, relationDao: RelationImpl) {
 
-    val relationDao = RelationImpl()
-    val userDao = UserImpl()
+
     authenticate {
         route("/relations") {
             // Order route
@@ -71,9 +70,9 @@ fun Route.relationRoutes() {
                             val addOrder = relationDao.addOrder(newOrder)
 
                             if (addOrder){
-                                return@post call.respondText("[SUCCESS] Order created", status = HttpStatusCode.Created)
+                                return@post call.respond(HttpStatusCode.Created, true)
                             } else {
-                                return@post call.respondText("[ERROR] Order couldn't be created", status = HttpStatusCode.BadRequest)
+                                return@post call.respond(HttpStatusCode.BadRequest, false)
                             }
                         }
                     }
@@ -102,10 +101,11 @@ fun Route.relationRoutes() {
                                 )
                             }
                             val putOrder = relationDao.putOrder(orderID.toInt(), newState)
+
                             if (putOrder){
-                                return@put call.respondText("[SUCCESS] Order updated to $newState", status = HttpStatusCode.OK)
+                                return@put call.respond(HttpStatusCode.Created, true)
                             } else {
-                                return@put call.respondText("[ERROR] Order couldn't be updated", status = HttpStatusCode.BadRequest)
+                                return@put call.respond(HttpStatusCode.BadRequest, false)
                             }
                         }
                     }
@@ -133,9 +133,7 @@ fun Route.relationRoutes() {
                             val currentCart = relationDao.getCart(userID.toInt())
 
                             if (currentCart != null){
-
                                 call.respond(HttpStatusCode.OK, currentCart)
-
                             } else {
                                 call.respondText("[ERROR] This user has no cart..", status = HttpStatusCode.NotFound)
                             }
@@ -164,17 +162,16 @@ fun Route.relationRoutes() {
                                     status = HttpStatusCode.Unauthorized
                                 )
                             }
+
                             val addCart = relationDao.createCart(newCart)
 
                             if (addCart){
-                                return@post call.respondText("[SUCCESS] Cart created", status = HttpStatusCode.Created)
+                                return@post call.respond(HttpStatusCode.Created, true)
                             } else {
-                                return@post call.respondText("[ERROR] Cart couldn't be created", status = HttpStatusCode.BadRequest)
+                                return@post call.respond(HttpStatusCode.BadRequest, false)
                             }
                         }
                     }
-
-
                 }
                 // Update product list of cart
                 put {
@@ -200,14 +197,14 @@ fun Route.relationRoutes() {
                             val updateCart = relationDao.updateCart(userID.toInt(), newProductList)
 
                             if (updateCart){
-                                return@put call.respondText("[SUCCESS] Cart updated", status = HttpStatusCode.OK)
+                                return@put call.respond(HttpStatusCode.OK, true)
                             } else {
-                                return@put call.respondText("[ERROR] Cart couldn't be updated", status = HttpStatusCode.BadRequest)
+                                return@put call.respond(HttpStatusCode.BadRequest, false)
                             }
                         }
                     }
-                }
-
+                    }
+                // Delete cart
                 delete {
                     val userID = call.parameters["userID"]
                     if (userID.isNullOrBlank())
@@ -229,9 +226,9 @@ fun Route.relationRoutes() {
                             val deleteCart = relationDao.deleteCart(cartID)
 
                             if (deleteCart){
-                                return@delete call.respondText("[SUCCESS] Cart deleted", status = HttpStatusCode.OK)
+                                return@delete call.respond(HttpStatusCode.OK, true)
                             } else {
-                                return@delete call.respondText("[ERROR] Cart couldn't be deleted", status = HttpStatusCode.BadRequest)
+                                return@delete call.respond(HttpStatusCode.BadRequest, false)
                             }
                         }
                     }
