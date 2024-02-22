@@ -24,7 +24,7 @@
 
 
 ## 📼Demo
-[Video Demo App](https://imgur.com/a/vUkoyzG)
+[Video Demo App](https://files.fm/u/5sds4jyygh#/view/srf8pd8jgh)
 
 
 ## 🙋Frequently Asked Questions (FAQ)
