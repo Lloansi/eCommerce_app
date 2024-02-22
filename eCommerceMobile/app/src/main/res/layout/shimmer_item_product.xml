@@ -5,14 +5,13 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:padding="5sp"
     android:gravity="center"
     android:orientation="horizontal">
 
     <com.google.android.material.card.MaterialCardView
-        android:padding="4sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:cardBackgroundColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -41,8 +40,8 @@
             <LinearLayout
                 android:layout_margin="4sp"
                 android:orientation="vertical"
-                android:layout_width="120sp"
-                android:layout_height="120sp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <View
                     android:id="@+id/category_popular"
@@ -126,7 +125,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-
+<!--
             <LinearLayout
                 android:layout_gravity="top"
                 android:layout_marginTop="4sp"
@@ -151,7 +150,7 @@
                     android:layout_width="15dp"
                     android:layout_height="11dp"/>
 
-            </LinearLayout>
+            </LinearLayout> -->
 
         </LinearLayout>
 

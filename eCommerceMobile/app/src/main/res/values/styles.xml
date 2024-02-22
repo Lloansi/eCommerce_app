@@ -7,7 +7,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
         <!-- Add your other styling attributes here -->
 
         <!-- Style for the SearchView -->
@@ -28,6 +27,16 @@
         <item name="android:queryHint">@string/search_hint</item>
 
         <!-- Add more customization as needed -->
+    </style>
+
+    <!-- Style for the floating button of onboarding -->
+    <style name="MyFabStyle" parent="">
+        <item name="cornerSize">60%</item> <!-- Set cornerSize to 50% for a perfect circle -->
+    </style>
+
+    <style name="MyFabStyle2" parent="">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">28dp</item> <!-- Adjust the cornerSize to make it heavier -->
     </style>
 
 </resources>

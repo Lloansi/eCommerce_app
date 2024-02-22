@@ -3,19 +3,34 @@ package com.example.ecommercemobile.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecommercemobile.data.RelationRepository
+import com.example.ecommercemobile.data.repository.OrdersRepository
+import com.example.ecommercemobile.data.repository.ProductsRepository
 import com.example.ecommercemobile.data.model.OrderClient
 import com.example.ecommercemobile.data.model.OrderState
+import com.example.ecommercemobile.data.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class OrdersViewModel @Inject constructor(
-    private val repository: RelationRepository): ViewModel() {
+    private val productsRepository: ProductsRepository,
+    private val repository: OrdersRepository
+): ViewModel() {
 
     var vmOrderListClient = MutableLiveData<List<OrderClient>>()
+    var vmOrderProductsMap = MutableLiveData<Map<OrderClient, List<Product>>>()
+
+    // Create a map of orders and their products
+    fun mapOfOrdersAndProducts(){
+        viewModelScope.launch {
+            val map:MutableMap<OrderClient, List<Product>> = mutableMapOf()
+            for (order in vmOrderListClient.value!!) {
+                map[order] = productsRepository.getProductsById(order.productList)!!
+            }
+            vmOrderProductsMap.postValue(map)
+        }
+    }
 
     // Gets the orders of the user or an empty list if there's no orders
     fun getOrders(userID: Int) {

@@ -10,6 +10,7 @@ class OrdersViewPagerAdapter(
     lifecycle: Lifecycle,
     private val orderCategories: List<Fragment>
 ): FragmentStateAdapter(fragmentManager,lifecycle) {
+
     override fun getItemCount(): Int {
         return orderCategories.size
     }

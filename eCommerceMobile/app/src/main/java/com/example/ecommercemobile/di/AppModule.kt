@@ -3,15 +3,15 @@ package com.example.ecommercemobile.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.example.ecommercemobile.data.RelationRepository
-import com.example.ecommercemobile.data.Repository
-import com.example.ecommercemobile.data.RepositoryProducts
-import com.example.ecommercemobile.data.network.ApiAuth
-import com.example.ecommercemobile.data.network.ApiProducts
-import com.example.ecommercemobile.data.network.ApiRelation
-import com.example.ecommercemobile.data.network.AuthService
-import com.example.ecommercemobile.data.network.ProductsService
-import com.example.ecommercemobile.data.network.RelationService
+import com.example.ecommercemobile.data.repository.OrdersRepository
+import com.example.ecommercemobile.data.repository.AuthRepository
+import com.example.ecommercemobile.data.repository.ProductsRepository
+import com.example.ecommercemobile.data.network.auth.ApiAuth
+import com.example.ecommercemobile.data.network.products.ApiProducts
+import com.example.ecommercemobile.data.network.orders.ApiOrders
+import com.example.ecommercemobile.data.network.auth.AuthService
+import com.example.ecommercemobile.data.network.products.ProductsService
+import com.example.ecommercemobile.data.network.orders.OrdersService
 import com.example.ecommercemobile.utils.Constants
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -43,7 +43,6 @@ object AppModule {
             .client(client)
             .build()
             .create()
-
     }
     @Provides
     @Singleton
@@ -61,11 +60,10 @@ object AppModule {
             .client(client)
             .build()
             .create()
-
     }
     @Provides
     @Singleton
-    fun provideRelationApi(): ApiRelation {
+    fun provideRelationApi(): ApiOrders {
         val gson = GsonBuilder()
             .serializeNulls()
             .create()
@@ -80,28 +78,24 @@ object AppModule {
             .build()
             .create()
     }
-
     @Provides
     @Singleton
     fun provideSharedPref(app: Application): SharedPreferences {
         return app.getSharedPreferences("prefs", MODE_PRIVATE)
     }
-
     @Provides
     @Singleton
     fun provideAuthRepository(api: ApiAuth, prefs: SharedPreferences): AuthService {
-        return Repository(api, prefs)
+        return AuthRepository(api, prefs)
     }
     @Provides
     @Singleton
-    fun provideRelationRepository(relationApi: ApiRelation, prefs: SharedPreferences): RelationService {
-        return RelationRepository(relationApi, prefs)
+    fun provideRelationRepository(relationApi: ApiOrders, prefs: SharedPreferences): OrdersService {
+        return OrdersRepository(relationApi, prefs)
     }
-
     @Provides
     @Singleton
-    fun provideProductsRepository(productsApi: ApiProducts ): ProductsService {
-        return RepositoryProducts(productsApi)
+    fun provideProductsRepository(productsApi: ApiProducts): ProductsService {
+        return ProductsRepository(productsApi)
     }
-
 }

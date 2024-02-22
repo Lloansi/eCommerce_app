@@ -11,14 +11,16 @@ import com.example.ecommercemobile.R
 import com.example.ecommercemobile.data.model.Product
 import com.example.ecommercemobile.databinding.ItemCartBinding
 import com.example.ecommercemobile.ui.view.adapters.interfaces.OnClickListenerCart
+import com.example.ecommercemobile.utils.Constants
 
-class CartAdapter(private val productList: List<Product>,
+class CartAdapter(private val productMap: Map<Product?,Int>,
                   val listener: OnClickListenerCart
 ): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+
+    private lateinit var context: Context
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemCartBinding.bind(view)
-
-
         fun setListener(product: Product) {
             binding.root.setOnClickListener {
                 listener.onClick(product)
@@ -29,12 +31,9 @@ class CartAdapter(private val productList: List<Product>,
             binding.removeBT.setOnClickListener {
                 listener.onRemove(product)
             }
-            binding.deleteBT.setOnClickListener {
-                listener.onDelete(product)
-            }
         }
     }
-    private lateinit var context: Context
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.ViewHolder {
         context = parent.context
         val view = ItemCartBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -42,27 +41,28 @@ class CartAdapter(private val productList: List<Product>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product = productList[position]
+        val product = productMap.keys.elementAt(position)
         with(holder) {
-            setListener(product)
+            setListener(product!!)
             binding.productTV.text = product.name
+            binding.productTV.isSelected = true
             binding.priceTV.text = "${product.price}${context.getString(R.string.euro)}"
             binding.categoryChip.text = product.category
-            binding.quantityET.setText(productList.count { it.id == product.id }.toString())
+            binding.quantityET.setText(productMap[product].toString())
             Glide.with(context)
-                .load("http://10.0.2.2:8000/api/uploads/images/${product.image}")
+                .load("${Constants.PRODUCT_API_URL}products/images/${product.image}")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .circleCrop()
-                .into(binding.productIV)
+                .into(binding.ivProduct)
         }
     }
+
     override fun getItemCount(): Int {
-        return productList.size
+        return productMap.size
     }
 
     fun updateProducts() {
         notifyDataSetChanged()
     }
-
 }

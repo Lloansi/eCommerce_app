@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.view.HelpFragment"
+    >
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:title="Help Center" />
+
+    <TextView
+        android:id="@+id/headerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/noto_sans"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
+        app:layout_constraintBottom_toTopOf="@id/bodyTV"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        android:text="Welcome to the Vhost Help Center "/>
+
+    <TextView
+        android:id="@+id/bodyTV"
+        android:fontFamily="@font/noto_sans"
+        android:padding="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/headerTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:text="If you need assistance or have any questions about our mobile application please send us a email at:"/>
+
+
+    <TextView
+        android:id="@+id/emailTV"
+        android:fontFamily="@font/noto_sans"
+        android:padding="16dp"
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:textColor="@color/vhost_orange"
+        android:text="contacto@vhost.es"
+        app:layout_constraintTop_toBottomOf="@id/bodyTV"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

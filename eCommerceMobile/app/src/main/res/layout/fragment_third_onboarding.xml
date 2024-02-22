@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.view.onboarding.ThirdOnboardingFragment"
+    android:padding="36dp"
+    android:background="@color/vhost_gray">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="213dp"
+        android:layout_height="343dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/onboarding_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans"
+        android:gravity="center"
+        android:text="¿Listo para descubrir?"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+        android:textColor="@color/vhost_orange"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/noto_sans"
+        android:text="¡Disfruta de tus compras!\n¡Hasta pronto!"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/vhost_orange"
+        android:src="@drawable/baseline_keyboard_arrow_right_24"
+        android:layout_marginBottom="30dp"
+        app:elevation="3dp"
+        app:fabCustomSize="80sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="48dp"
+        app:shapeAppearanceOverlay="@style/MyFabStyle"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:fontFamily="@font/noto_sans"
+        android:text="Skip"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/next_btn"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

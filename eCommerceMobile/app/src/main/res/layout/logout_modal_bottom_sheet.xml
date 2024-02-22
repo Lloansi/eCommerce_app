@@ -3,7 +3,6 @@
     style="@style/Widget.Material3.BottomSheet.Modal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/mateBlack"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,7 +14,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white"
 
         />
     <!-- Bottom sheet contents. -->
@@ -25,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
-        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/drag_handle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/logout2TV"
-        android:background="@color/white"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         />
@@ -52,7 +48,6 @@
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:text="@string/are_you_sure_you_want_to_log_out"
         app:layout_constraintTop_toBottomOf="@id/bottomSheetView"
         app:layout_constraintStart_toStartOf="parent"

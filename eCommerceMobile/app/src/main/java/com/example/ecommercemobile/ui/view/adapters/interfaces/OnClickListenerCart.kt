@@ -6,5 +6,5 @@ interface OnClickListenerCart {
     fun onClick(product: Product)
     fun onRemove(product: Product)
     fun onAdd(product: Product)
-    fun onDelete(product: Product )
+    fun onDelete(product: Product)
 }

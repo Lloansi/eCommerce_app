@@ -1,15 +1,19 @@
 package com.example.ecommercemobile.ui.view
 
-//import com.paypal.pyplcheckout.data.model.pojo.Amount
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ecommercemobile.R
 import com.example.ecommercemobile.data.model.OrderClient
 import com.example.ecommercemobile.data.model.OrderState
 import com.example.ecommercemobile.data.model.Product
@@ -38,7 +42,8 @@ import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CartFragment : Fragment(), OnClickListenerCart {
-    private lateinit var binding: FragmentCartBinding
+
+    lateinit var binding: FragmentCartBinding
     private lateinit var linearLayoutManager: RecyclerView.LayoutManager
     private lateinit var cartAdapter: CartAdapter
     private lateinit var cartViewModel: CartViewModel
@@ -46,12 +51,13 @@ class CartFragment : Fragment(), OnClickListenerCart {
     private lateinit var orderViewModel: OrdersViewModel
     private lateinit var productsViewModel: ProductsViewModel
     private var productListFromCart = mutableListOf<Product>()
+    private var mapProduct = mutableMapOf<Product?,Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        println("CART ON CREATE VIEW")
         userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         orderViewModel = ViewModelProvider(requireActivity())[OrdersViewModel::class.java]
         cartViewModel = ViewModelProvider(requireActivity())[CartViewModel::class.java]
@@ -61,12 +67,12 @@ class CartFragment : Fragment(), OnClickListenerCart {
         return binding.root
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
-
         }
 
         val userID = userViewModel.user.value?.userID
@@ -82,53 +88,74 @@ class CartFragment : Fragment(), OnClickListenerCart {
         }
 
         productsViewModel.productsFromCart.observe(viewLifecycleOwner) { productList ->
-            if (productList != null){
+            binding.shimmerViewContainer.startShimmer()
+            binding.shimmerViewContainer.visibility = View.VISIBLE
+            if (!productList.isNullOrEmpty()){
+                println(productList)
                 productListFromCart = productList.toMutableList()
-                setUpRecyclerView(productListFromCart)
-                binding.shimmerViewContainer.startShimmer()
-                binding.shimmerViewContainer.visibility = View.VISIBLE
+                mapProduct = setUpCartMap(productListFromCart)
+
+                setUpRecyclerView(mapProduct)
                 binding.toolbar.title = "My Cart(${productListFromCart.size})"
                 binding.checkoutBT.visibility = View.VISIBLE
                 binding.totalTV.visibility = View.VISIBLE
-                binding.totalTV.text = "Total: $${productListFromCart.sumOf { it.price }.round(2)}"
+                binding.totalHeaderTV.visibility = View.VISIBLE
+                binding.totalTV.text = "${productListFromCart.sumOf { it.price }.round(2)}"
                 binding.emptyCartTV.visibility = View.GONE
-                //binding.paymentButtonContainer.visibility = View.VISIBLE
+                binding.paymentButtonContainer.visibility = View.VISIBLE
             } else {
-                binding.shimmerViewContainer.stopShimmer()
-                binding.shimmerViewContainer.visibility = View.GONE
                 binding.paymentButtonContainer.visibility = View.GONE
                 binding.checkoutBT.visibility = View.GONE
                 binding.totalTV.visibility = View.GONE
+                binding.totalHeaderTV.visibility = View.GONE
                 binding.emptyCartTV.visibility = View.VISIBLE
             }
+            binding.shimmerViewContainer.stopShimmer()
+            binding.shimmerViewContainer.visibility = View.GONE
+            binding.swipelayout.isEnabled = true
         }
 
+        binding.swipelayout.setColorSchemeColors(R.color.white, R.color.orange)
+        binding.swipelayout.setOnRefreshListener {
+            binding.swipelayout.isRefreshing = false
+            binding.shimmerViewContainer.visibility = View.VISIBLE
+            binding.cartRecyclerView.visibility = View.INVISIBLE
+            binding.emptyCartTV.visibility = View.INVISIBLE
+            binding.paymentButtonContainer.visibility = View.INVISIBLE
+            cartViewModel.getCart(userID)
+            binding.swipelayout.isEnabled = false
+        }
 
         binding.checkoutBT.setOnClickListener{
-            // Se crea una orden con los productos del carrito
+            // Se crea una orden con los productos del carrito si no está vacío
             cartViewModel.vmCart.value?.let { cart ->
-                // Get the current date and convert-it to string
-                val currentDate = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss")
-                val currentDateString = currentDate.format(formatter)
-                // Create the order
-                orderViewModel.addOrder(OrderClient(0, userID!!, productListFromCart.map { product -> product.id},
-                    productListFromCart.sumOf { it.price }.round(2),
-                    currentDateString, OrderState.ONGOING))
-                // Delete the cart
-                cartViewModel.deleteCart(userID)
-                productsViewModel.productsFromCart.postValue(null)
-                setUpRecyclerView(emptyList())
+                if (cart.productList.isNotEmpty()){
+                    // Get the current date and convert-it to string
+                    val currentDate = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss")
+                    val currentDateString = currentDate.format(formatter)
+                    // Create the order
+                    orderViewModel.addOrder(
+                        OrderClient(0, userID!!, productListFromCart.map { product -> product.id},
+                        productListFromCart.sumOf { it.price }.round(2),
+                        currentDateString, OrderState.COMPLETED)
+                    )
+                    // Delete the cart
+                    productsViewModel.updateTimesBought(productListFromCart.map { product -> product.id})
+                    cartViewModel.deleteCart(userID)
+                    productsViewModel.productsFromCart.postValue(null)
+                    setUpRecyclerView(emptyMap())
+                    Toast.makeText(requireContext(), "Purchased!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-
-        configurePayPalButton()
+        configurePayPalButton(requireContext())
     }
 
-
-    private fun setUpRecyclerView(productList: List<Product>) {
-        cartAdapter = CartAdapter(productList, this)
+    private fun setUpRecyclerView(productMap: Map<Product?, Int>) {
+        cartAdapter = CartAdapter(productMap, this)
         linearLayoutManager = LinearLayoutManager(context)
+        binding.cartRecyclerView.visibility = View.VISIBLE
         binding.cartRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = linearLayoutManager
@@ -137,8 +164,8 @@ class CartFragment : Fragment(), OnClickListenerCart {
     }
 
     override fun onClick(product: Product) {
-        // Que vaya al detalle?
-        println(product.name)
+        val toDetail = CartFragmentDirections.actionCartFragmentToDetailFragment(product.id)
+        findNavController().navigate(toDetail)
     }
 
     override fun onRemove(product: Product) {
@@ -147,9 +174,9 @@ class CartFragment : Fragment(), OnClickListenerCart {
         // Update the cart passing the list of ids of the products
         cartViewModel.updateCart(userViewModel.user.value!!.userID,
             productListFromCart.map { product -> product.id})
-
+        mapProduct = setUpCartMap(productListFromCart)
         cartAdapter.updateProducts()
-        setUpRecyclerView(productListFromCart)
+        setUpRecyclerView(mapProduct)
         binding.toolbar.title  = "My Cart(${productListFromCart.size})"
     }
 
@@ -160,7 +187,8 @@ class CartFragment : Fragment(), OnClickListenerCart {
         cartViewModel.updateCart(userViewModel.user.value!!.userID,
             productListFromCart.map { product -> product.id})
         cartAdapter.updateProducts()
-        setUpRecyclerView(productListFromCart)
+        mapProduct = setUpCartMap(productListFromCart)
+        setUpRecyclerView(mapProduct)
         binding.toolbar.title  = "My Cart(${productListFromCart.size})"
     }
 
@@ -171,13 +199,13 @@ class CartFragment : Fragment(), OnClickListenerCart {
         cartViewModel.updateCart(userViewModel.user.value!!.userID,
             productListFromCart.map { product -> product.id})
         cartAdapter.updateProducts()
-        setUpRecyclerView(productListFromCart)
+        mapProduct = setUpCartMap(productListFromCart)
+        setUpRecyclerView(mapProduct)
         binding.toolbar.title  = "My Cart(${productListFromCart.size})"
 
     }
 
-
-    private fun configurePayPalButton() {
+    private fun configurePayPalButton(ctx : Context) {
         binding.paymentButtonContainer.setup(
             createOrder = CreateOrder { createOrderActions ->
                 val order = OrderRequest(
@@ -185,7 +213,7 @@ class CartFragment : Fragment(), OnClickListenerCart {
                     appContext = AppContext(userAction = UserAction.PAY_NOW),
                     purchaseUnitList = listOf(
                         PurchaseUnit(
-                            amount = Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+                            amount = Amount(currencyCode = CurrencyCode.EUR, value = "${productListFromCart.sumOf { it.price }.round(2)}")
                         )
                     )
                 )
@@ -195,17 +223,29 @@ class CartFragment : Fragment(), OnClickListenerCart {
                 approval.orderActions.capture { captureOrderResult ->
                     Log.i("CaptureOrder", "CaptureOrderResult: $captureOrderResult")
                     // Puedes manejar el resultado de la captura aquí
+                    Toast.makeText(ctx,"Payment Approved",Toast.LENGTH_SHORT).show()
+                    println("Payment Approved")
                 }
             },
             onCancel = OnCancel {
                 Log.d("OnCancel", "Buyer canceled the PayPal experience.")
                 // Puedes manejar la cancelación aquí
+                Toast.makeText(ctx,"Payment Canceled",Toast.LENGTH_SHORT).show()
+                println("Payment Canceled")
             },
             onError = OnError { errorInfo ->
                 Log.d("OnError", "Error: $errorInfo")
                 // Puedes manejar errores aquí
+                Toast.makeText(ctx,"Payment Error",Toast.LENGTH_SHORT).show()
+                print("Payment Error")
             }
         )
     }
-
+    fun setUpCartMap(list: List<Product>):MutableMap<Product?, Int> {
+        val mapOfProducts = mutableMapOf<Product?,Int>()
+        list.forEach{product->
+            mapOfProducts[product] = list.count{it.id==product.id}
+        }
+        return mapOfProducts
+    }
 }

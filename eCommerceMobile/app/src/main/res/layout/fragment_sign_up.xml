@@ -1,174 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/mateBlack"
     tools:context=".ui.view.SignUpFragment">
 
     <ImageView
         android:id="@+id/logoIV"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/createAccountTV"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/createAccountTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_an_account"
-        android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/logoIV"
         app:layout_constraintBottom_toTopOf="@id/emailET"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <!--<com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nicknameET"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.11"
-        android:hint="@string/nickname"
-        android:background="@color/mateBlack"
-        android:textColorHint="@color/white"
-        app:boxStrokeColor="@color/white"
-        app:boxStrokeErrorColor="@color/white"
-        app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountTV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/emailET">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:background="@drawable/round_edit_text_white"
-            android:singleLine="true" />
-
-    </com.google.android.material.textfield.TextInputLayout> -->
-
+        app:layout_constraintTop_toBottomOf="@+id/logoIV" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailET"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.11"
-        android:hint="Email"
-        app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
-        app:errorEnabled="true"
-        android:background="@color/mateBlack"
-        android:textColorHint="@color/white"
-        app:boxStrokeColor="@color/white"
-        app:boxStrokeErrorColor="@color/white"
-        app:errorTextColor="@color/orange"
-        app:hintTextColor="@color/white"
-        app:errorIconTint="@color/orange"
-        app:cursorColor="@color/white"
-        app:helperTextTextColor="@color/white"
-        app:placeholderTextColor="@color/white"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountTV"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="Email"
+        app:boxStrokeColor="@color/orange"
+        app:boxStrokeErrorColor="@color/vhost_orangeDarker"
+        app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+        app:cursorColor="@color/orange"
+        app:errorEnabled="true"
+        app:errorIconTint="@color/orange"
+        app:errorTextColor="@color/orange"
+        app:helperTextTextColor="@color/orange"
+        app:hintTextColor="@color/orange"
+        app:layout_constraintBottom_toTopOf="@id/passwordET"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/passwordET">
+        app:layout_constraintHeight_percent="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountTV"
+        app:layout_constraintWidth_percent="0.85"
+        app:placeholderTextColor="@color/orange">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:background="@drawable/round_edit_text_white"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordET"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.11"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/password"
+        app:boxStrokeColor="@color/orange"
+        app:boxStrokeErrorColor="@color/vhost_orangeDarker"
         app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+        app:cursorColor="@color/orange"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
-        android:background="@color/mateBlack"
-        android:textColorHint="@color/white"
-        app:counterTextColor="@color/white"
-        app:endIconTint="@color/white"
-        app:boxStrokeColor="@color/white"
-        app:boxStrokeErrorColor="@color/white"
-        app:passwordToggleTint="@color/white"
-        app:errorTextColor="@color/orange"
         app:errorIconTint="@color/orange"
-        app:hintTextColor="@color/white"
-        app:helperTextTextColor="@color/white"
-        app:placeholderTextColor="@color/white"
-        app:cursorColor="@color/white"
+        app:errorTextColor="@color/orange"
+        app:helperTextTextColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@id/repeatPassET"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailET">
+        app:layout_constraintTop_toBottomOf="@id/emailET"
+        app:layout_constraintWidth_percent="0.85"
+        app:placeholderTextColor="@color/orange">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:background="@drawable/round_edit_text_white"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/repeatPassET"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.11"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="@string/repeat_password"
+        app:boxStrokeColor="@color/orange"
+        app:boxStrokeErrorColor="@color/vhost_orangeDarker"
         app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+        app:cursorColor="@color/orange"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
-        android:background="@color/mateBlack"
-        android:textColorHint="@color/white"
-        app:counterTextColor="@color/white"
-        app:endIconTint="@color/white"
-        app:boxStrokeColor="@color/white"
-        app:boxStrokeErrorColor="@color/white"
-        app:passwordToggleTint="@color/white"
         app:errorIconTint="@color/orange"
         app:errorTextColor="@color/orange"
-        app:hintTextColor="@color/white"
-        app:helperTextTextColor="@color/white"
-        app:placeholderTextColor="@color/white"
-        app:cursorColor="@color/white"
+        app:helperTextTextColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@id/signUpBT"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordET">
+        app:layout_constraintTop_toBottomOf="@id/passwordET"
+        app:layout_constraintWidth_percent="0.85"
+        app:placeholderTextColor="@color/orange">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:background="@drawable/round_edit_text_white"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -177,88 +127,65 @@
         android:id="@+id/signUpBT"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:text="@string/sign_up"
         android:layout_marginTop="5dp"
-        android:textColor="@color/white"
         android:background="@drawable/round_button"
+        android:text="@string/sign_up"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        app:layout_constraintBottom_toTopOf="@+id/tv_already_account"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/repeatPassET"
-        app:layout_constraintBottom_toTopOf="@+id/orsignupwithTV"
-        app:layout_constraintWidth_percent="0.85"
-        app:layout_constraintHeight_percent="0.07"/>
+        app:layout_constraintWidth_percent="0.85" />
 
     <View
         android:id="@+id/line1"
         android:layout_width="100dp"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginStart="35dp"
-        android:background="@color/white"
+        android:background="@color/lightgray"
+        app:layout_constraintEnd_toStartOf="@id/tv_already_account"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/loginWithGoogleIV"
-        app:layout_constraintEnd_toStartOf="@id/orsignupwithTV"
         app:layout_constraintTop_toBottomOf="@id/signUpBT" />
 
     <TextView
-        android:id="@+id/orsignupwithTV"
+        android:id="@+id/tv_already_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/or_sign_up_with"
-        android:textColor="@color/white"
+        android:text="Already have an account?"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        app:layout_constraintTop_toBottomOf="@+id/signUpBT"
-        app:layout_constraintStart_toEndOf="@id/line1"
+        app:layout_constraintBottom_toTopOf="@id/tv_sign_in"
         app:layout_constraintEnd_toStartOf="@id/line2"
-        app:layout_constraintBottom_toTopOf="@id/loginWithGoogleIV"
-        />
+        app:layout_constraintStart_toEndOf="@id/line1"
+        app:layout_constraintTop_toBottomOf="@+id/signUpBT" />
 
     <View
         android:id="@+id/line2"
         android:layout_width="100dp"
-        android:layout_height="1dp"
-        android:background="@color/white"
+        android:layout_height="2dp"
         android:layout_marginEnd="35dp"
-        app:layout_constraintBottom_toTopOf="@id/loginWithGoogleIV"
-        app:layout_constraintStart_toEndOf="@id/orsignupwithTV"
+        android:background="@color/lightgray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_already_account"
         app:layout_constraintTop_toBottomOf="@id/signUpBT" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/loginWithGoogleIV"
-        android:layout_width="30dp"
-        android:layout_height="45dp"
-        app:civ_circle_background_color="@color/white"
-        android:src="@drawable/icon_google"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/orsignupwithTV"
-        app:layout_constraintBottom_toTopOf="@id/signin1TV"
-        />
 
     <TextView
-        android:id="@+id/signin1TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/already_have_an_account"
-        android:textColor="@color/white"
-        android:layout_marginEnd="10dp"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        app:layout_constraintTop_toBottomOf="@+id/loginWithGoogleIV"
-        app:layout_constraintStart_toStartOf="@id/loginWithGoogleIV"
-        app:layout_constraintEnd_toStartOf="@id/signin2TV"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/signin2TV"
+        android:id="@+id/tv_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in_underline"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/loginWithGoogleIV"
-        app:layout_constraintStart_toEndOf="@id/signin1TV"
-        app:layout_constraintTop_toBottomOf="@+id/loginWithGoogleIV" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_already_account" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="649dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

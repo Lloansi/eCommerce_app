@@ -4,16 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.SearchFragment"
-    android:background="#DCDCDC"
     xmlns:app="http://schemas.android.com/apk/res-auto"
    >
 
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        android:background="#DCDCDC"
-        app:titleTextColor="@color/white"
-        app:navigationIconTint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +59,7 @@
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

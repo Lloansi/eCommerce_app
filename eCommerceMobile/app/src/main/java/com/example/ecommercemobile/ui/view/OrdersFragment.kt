@@ -15,7 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OrdersFragment : Fragment() {
-    private lateinit var binding: FragmentOrdersBinding
+
+    lateinit var binding: FragmentOrdersBinding
     private lateinit var userViewModel: UserViewModel
     private lateinit var orderViewModel: OrdersViewModel
 
@@ -25,14 +26,23 @@ class OrdersFragment : Fragment() {
     ): View? {
         userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         orderViewModel = ViewModelProvider(requireActivity())[OrdersViewModel::class.java]
-       binding = FragmentOrdersBinding.inflate(inflater,container,false)
+        binding = FragmentOrdersBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
         val userID = userViewModel.user.value?.userID
         orderViewModel.getOrders(userID!!)
+        orderViewModel.vmOrderListClient.observe(viewLifecycleOwner){ orderList ->
+            orderViewModel.mapOfOrdersAndProducts()
+        }
 
         // Same fragment but different data in the recyclerView
         val orderCategories = arrayListOf<Fragment>(
@@ -53,8 +63,5 @@ class OrdersFragment : Fragment() {
                 2 -> tab.text = "Cancelled"
             }
         }.attach()
-
     }
-
-
 }

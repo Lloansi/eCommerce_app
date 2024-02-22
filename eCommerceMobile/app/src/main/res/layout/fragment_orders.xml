@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mateBlack"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.view.OrdersFragment">
 
@@ -15,22 +14,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
-        app:titleTextColor="@color/white"
-        app:navigationIconTint="@color/white"
+
         app:title="Orders" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabRippleColor="@color/white"
+        app:tabRippleColor="@color/vhost_orange"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        android:background="@color/mateBlack"
-        app:tabBackground="@color/mateBlack"
-        app:tabSelectedTextColor="@color/orange"
+        app:tabSelectedTextColor="@color/vhost_orange"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"/>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerOrders"
         android:layout_width="0dp"

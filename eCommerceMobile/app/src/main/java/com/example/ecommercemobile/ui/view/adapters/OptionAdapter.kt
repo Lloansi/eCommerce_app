@@ -12,6 +12,9 @@ import com.example.ecommercemobile.ui.view.adapters.interfaces.OnClickListenerOp
 class OptionAdapter(private val options: List<Pair<Int,String>>,
                     val listener: OnClickListenerOption
 ): RecyclerView.Adapter<OptionAdapter.ViewHolder>(){
+
+    private lateinit var context: Context
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemOptionBinding.bind(view)
         fun setListener(option: String) {
@@ -21,7 +24,6 @@ class OptionAdapter(private val options: List<Pair<Int,String>>,
         }
     }
 
-    private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OptionAdapter.ViewHolder {
         context = parent.context
         val view = LayoutInflater.from(context).inflate(R.layout.item_option, parent, false)
@@ -31,7 +33,6 @@ class OptionAdapter(private val options: List<Pair<Int,String>>,
     override fun onBindViewHolder(holder: OptionAdapter.ViewHolder, position: Int) {
         val option = options[position]
         with(holder) {
-            println(option.second)
             setListener(option.second)
             binding.optionTV.text = option.second
             binding.iconIV.setImageResource(option.first)
@@ -41,5 +42,4 @@ class OptionAdapter(private val options: List<Pair<Int,String>>,
     override fun getItemCount(): Int {
         return options.size
     }
-
-    }
+}

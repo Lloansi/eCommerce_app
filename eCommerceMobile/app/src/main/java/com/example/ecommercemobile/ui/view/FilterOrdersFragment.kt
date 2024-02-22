@@ -1,5 +1,6 @@
 package com.example.ecommercemobile.ui.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ecommercemobile.R
 import com.example.ecommercemobile.data.model.OrderClient
 import com.example.ecommercemobile.data.model.OrderState
+import com.example.ecommercemobile.data.model.Product
 import com.example.ecommercemobile.databinding.FragmentFilterOrdersBinding
 import com.example.ecommercemobile.ui.view.adapters.OrdersAdapter
 import com.example.ecommercemobile.ui.view.adapters.interfaces.OnClickListenerOrder
@@ -20,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FilterOrdersFragment(val filter: String) : Fragment(), OnClickListenerOrder {
-    private lateinit var binding: FragmentFilterOrdersBinding
+
+    lateinit var binding: FragmentFilterOrdersBinding
     private lateinit var orderAdapter: OrdersAdapter
     private lateinit var linearLayoutManager: RecyclerView.LayoutManager
     private lateinit var userViewModel: UserViewModel
@@ -33,32 +37,44 @@ class FilterOrdersFragment(val filter: String) : Fragment(), OnClickListenerOrde
         userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         orderViewModel = ViewModelProvider(requireActivity())[OrdersViewModel::class.java]
         binding = FragmentFilterOrdersBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        orderViewModel.vmOrderListClient.observe(viewLifecycleOwner){ orderList ->
-            // Filtrar la lista de ordenes que estará en el viewmodel
-            when (filter){
+        val userID = userViewModel.user.value?.userID
+        orderViewModel.vmOrderProductsMap.observe(viewLifecycleOwner) { mapOfOrdersAndProducts ->
+            when (filter) {
                 "COMPLETED" -> {
-                    setUpRecyclerView(orderList.filter { it.state == OrderState.COMPLETED })
+                    setUpRecyclerView(mapOfOrdersAndProducts.filter { it.key.state == OrderState.COMPLETED })
                 }
                 "CANCELLED" -> {
-                    setUpRecyclerView(orderList.filter { it.state == OrderState.CANCELLED })
+                    setUpRecyclerView(mapOfOrdersAndProducts.filter { it.key.state == OrderState.CANCELLED })
                 }
                 else -> {
-                    setUpRecyclerView(orderList)
+                    setUpRecyclerView(mapOfOrdersAndProducts)
                 }
             }
         }
 
+        binding.swipelayout.setColorSchemeColors(R.color.white, R.color.orange)
+        binding.swipelayout.setOnRefreshListener {
+            binding.swipelayout.isRefreshing = false
+           // binding.shimmerViewContainer.visibility = View.VISIBLE
+            binding.ordersRecyclerView.visibility = View.INVISIBLE
+            orderViewModel.getOrders(userID!!)
+            binding.swipelayout.isEnabled = false
+        }
     }
 
-    private fun setUpRecyclerView(orderClientList: List<OrderClient>) {
-        orderAdapter = OrdersAdapter(orderClientList, emptyList(), this)
+    private fun setUpRecyclerView(mapOfOrdersAndProducts: Map<OrderClient, List<Product>>) {
+        orderAdapter = OrdersAdapter(mapOfOrdersAndProducts, this)
         linearLayoutManager = LinearLayoutManager(context)
+        binding.ordersRecyclerView.visibility = View.VISIBLE
+        binding.swipelayout.isEnabled = true
         binding.ordersRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = linearLayoutManager
@@ -67,8 +83,7 @@ class FilterOrdersFragment(val filter: String) : Fragment(), OnClickListenerOrde
     }
 
     override fun onOrderClick(orderClient: OrderClient) {
-        val toOrderDetail = OrdersFragmentDirections.actionOrdersFragmentToOrderDetailFragment()
+        val toOrderDetail = OrdersFragmentDirections.actionOrdersFragmentToOrderDetailFragment(orderClient.idOrder)
         findNavController().navigate(toOrderDetail)
     }
-
 }

@@ -5,153 +5,134 @@
     android:layout_height="180dp"
     android:clickable="true"
     android:focusable="true"
-    android:background="@color/mateBlack"
     android:layout_margin="8dp">
 
-    <View
-        android:id="@+id/productIV"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:scaleType="centerCrop"
-        android:background="@color/ligthgray"
-        app:layout_constraintBottom_toTopOf="@id/midView"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.chip.Chip
         android:id="@+id/categoryChip"
-        android:layout_width="100dp"
-        android:layout_height="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:text="Category"
         android:checkable="false"
         android:clickable="false"
-        app:chipStrokeWidth="1dp"
-        app:chipBackgroundColor="@color/ligthgray"
-        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:chipBackgroundColor="@color/lightgray"
+        android:textColor="@color/lightgray"
+        android:layout_margin="4dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <TextView
-        android:id="@+id/productTV"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@color/ligthgray"
-        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-        app:layout_constraintStart_toEndOf="@id/guideline3"
-        app:layout_constraintBottom_toTopOf="@id/priceTV"
-        app:layout_constraintTop_toBottomOf="@id/categoryChip"
-        />
-
-    <TextView
-        android:id="@+id/priceTV"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:background="@color/ligthgray"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        app:layout_constraintStart_toEndOf="@id/guideline3"
-        app:layout_constraintBottom_toTopOf="@id/midView"
-        app:layout_constraintTop_toBottomOf="@id/productTV"
-        />
-
-    <View
-        android:id="@+id/midView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/priceTV"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline5"
-        android:background="@color/white"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/deleteBT"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.215"
-        app:icon="@drawable/baseline_delete_24"
-        android:layout_gravity="bottom|end"
-        app:elevation="1dp"
-        android:text="@string/remove"
-        app:shapeAppearance="@style/TextAppearance.AppCompat.Button"
-        android:backgroundTint="@color/lightGrey"
-        android:contentDescription="Remove button"
-        android:textColor="@color/lightGrey"
-        app:iconTint="@color/lightGrey"
-        app:layout_constraintTop_toBottomOf="@id/midView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/round_add_circle_24"
-        style="?attr/floatingActionButtonSmallStyle"
-        app:elevation="2dp"
-        app:tint="@color/lightGrey"
-        android:backgroundTint="@color/lightGrey"
-        app:shapeAppearance="@style/TextAppearance.AppCompat.Button"
-        app:layout_constraintTop_toBottomOf="@id/midView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/quantityET"
-        />
-
-    <View
-        android:text="1"
-        android:inputType="number"
-        android:id="@+id/quantityET"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:background="@color/ligthgray"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/midView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/addBT"
-        app:layout_constraintStart_toEndOf="@id/removeBT"
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/removeBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/round_remove_circle_24"
-        style="?attr/floatingActionButtonSmallStyle"
-        app:elevation="2dp"
-        app:tint="@color/lightGrey"
-        android:backgroundTint="@color/lightGrey"
-        app:shapeAppearance="@style/TextAppearance.AppCompat.Button"
-        app:layout_constraintTop_toBottomOf="@id/midView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/quantityET"
-        app:layout_constraintStart_toEndOf="@id/guideline4"
-        />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_marginTop="2dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dividerInsetEnd="16dp"
-        app:dividerInsetStart="16dp"
-        app:dividerThickness="1dp"
-        app:lastItemDecorated="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryChip">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_product"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:background="@color/lightgray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/productTV"
+                android:ellipsize="marquee"
+                android:layout_width="170dp"
+                android:layout_height="30dp"
+                android:background="@color/lightgray"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintStart_toEndOf="@id/iv_product"
+                app:layout_constraintEnd_toStartOf="@id/addBT"
+                app:layout_constraintBottom_toTopOf="@id/priceTV"
+                app:layout_constraintTop_toTopOf="@id/iv_product"
+                />
+
+            <View
+                android:id="@+id/priceTV"
+                android:layout_marginTop="4dp"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:background="@color/lightgray"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                app:layout_constraintStart_toStartOf="@id/productTV"
+                app:layout_constraintTop_toTopOf="@id/iv_product"
+                app:layout_constraintBottom_toBottomOf="@id/iv_product"
+                />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addBT"
+                android:background="@color/lightgray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/round_add_circle_24"
+                style="?attr/floatingActionButtonSmallStyle"
+                app:elevation="2dp"
+                app:tint="@color/lightgray"
+                android:backgroundTint="@color/lightgray"
+                app:shapeAppearance="@style/TextAppearance.AppCompat.Button"
+                app:layout_constraintTop_toTopOf="@id/iv_product"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:inputType="number"
+                android:id="@+id/quantityET"
+                android:background="@color/lightgray"
+                app:layout_constraintTop_toBottomOf="@id/removeBT"
+                app:layout_constraintBottom_toTopOf="@id/addBT"
+                app:layout_constraintEnd_toEndOf="@id/addBT"
+                app:layout_constraintStart_toStartOf="@id/addBT"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/removeBT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/round_remove_circle_24"
+                style="?attr/floatingActionButtonSmallStyle"
+                app:elevation="2dp"
+                app:tint="@color/lightgray"
+                android:backgroundTint="@color/lightgray"
+                app:shapeAppearance="@style/TextAppearance.AppCompat.Button"
+                app:layout_constraintBottom_toBottomOf="@id/iv_product"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -49,23 +49,30 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_loginFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_profileFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editAccountFragment"
+            app:destination="@id/editAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="com.example.ecommercemobile.ui.view.EditProfileFragment"
+        android:id="@+id/changeEmailFragment"
+        android:name="com.example.ecommercemobile.ui.view.ChangeEmailFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        tools:layout="@layout/fragment_change_email" >
         <action
-            android:id="@+id/action_editProfileFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_changeEmailFragment_to_loginFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -80,7 +87,11 @@
         android:id="@+id/cartFragment"
         android:name="com.example.ecommercemobile.ui.view.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.ecommercemobile.ui.view.DetailFragment"
@@ -89,12 +100,21 @@
         <argument
             android:name="productID"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.example.ecommercemobile.ui.view.OrderDetailFragment"
         android:label="fragment_order_detail"
         tools:layout="@layout/fragment_order_detail" >
+        <argument
+            android:name="orderID"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -104,5 +124,60 @@
         <action
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/editAccountFragment"
+        android:name="com.example.ecommercemobile.ui.view.EditAccountFragment"
+        android:label="fragment_edit_account"
+        tools:layout="@layout/fragment_edit_account" >
+        <action
+            android:id="@+id/action_editAccountFragment_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_editAccountFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.ecommercemobile.ui.view.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.ecommercemobile.ui.view.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.example.ecommercemobile.ui.view.onboarding.OnboardingFragment"
+        android:label="fragment_onboarding"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.ecommercemobile.ui.view.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
 </navigation>

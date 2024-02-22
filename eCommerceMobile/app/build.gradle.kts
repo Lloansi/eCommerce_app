@@ -73,10 +73,13 @@ dependencies {
 
     // Circular ImageView
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
     // Loading button
     implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
+
     // Resend
     implementation ("com.resend:resend-java:2.1.0")
+
     //GLIDE
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     kapt ("com.github.bumptech.glide:compiler:4.12.0")
@@ -84,9 +87,18 @@ dependencies {
     // SHIMMER
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
+    //SWIPE REFRESH LAYOUT
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
     //PAYPAL
     implementation("com.paypal.checkout:android-sdk:1.1.0")
+
+    // SPLASH SCREEN
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // TESTING
+    testImplementation ("junit:junit:4.+")
+    testImplementation ("io.mockk:mockk:1.12.2")
 
 }
 // Allow references to generated code

@@ -1,7 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ECommerceMobile" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.ECommerceMobile" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="backgroundColor">@color/mateBlack</item>
+        <item name="colorPrimary">@color/vhost_orangeDarker</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/vhost_orangeDarker</item>
+        <item name="colorSecondary">@color/vhost_orangeDarker</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/vhost_orangeDarker</item>
+        <item name="colorTertiary">@color/vhost_orangeDarker</item>
+        <item name="colorTertiaryContainer">@color/vhost_orangeDarker</item>
+        <item name="navigationIconTint">@color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/vhost_orangeDarker</item>
     </style>
+    <style name="Theme.ECommerceMobile" parent="Base.Theme.ECommerceMobile" />
 </resources>

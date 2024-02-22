@@ -8,7 +8,7 @@ data class Product(
     var category: String,
     var price: Double,
     var location: String,
-    var specs: Specs,
+    var specs: Specs?,
     var stock: Int,
     var timesBought: Int
 )

@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecommercemobile.data.Repository
+import com.example.ecommercemobile.data.repository.AuthRepository
 import com.example.ecommercemobile.data.model.User
 import com.example.ecommercemobile.data.model.auth.AuthRequest
 import com.example.ecommercemobile.data.model.auth.AuthResult
@@ -25,56 +25,56 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(
-    private val repository: Repository
+    private val authRepository: AuthRepository
 ): ViewModel() {
 
-    var user = MutableLiveData<User?>()
+    val user = MutableLiveData<User?>()
     val authResult = MutableLiveData<AuthResult<Unit>>()
     val userImage = MutableLiveData<Bitmap>()
+    val isPasswordChanged = MutableLiveData<Boolean>()
 
     init {
+        println("VIEWMODEL-init()-authenticate()")
         authenticate()
     }
-    fun signUp(authRequest: AuthRequest) {
+
+    fun authenticate() {
+        println("VIEWMODEL-authenticate()")
         viewModelScope.launch {
-            val result = repository.signUp(authRequest)
+            val result = authRepository.authenticate()
             authResult.postValue(result)
         }
     }
 
     fun logIn(authRequest: AuthRequest) {
+        println("VIEWMODEL-logIn()")
         viewModelScope.launch {
-            val result = repository.logIn(authRequest)
+            val result = authRepository.logIn(authRequest)
             authResult.postValue(result)
         }
     }
 
-    fun validateEmail(email:String) {
+    fun signUp(authRequest: AuthRequest) {
+        println("VIEWMODEL-signUp()")
         viewModelScope.launch {
-            repository.validateEmail(email)
-        }
-
-    }
-
-    fun authenticate() {
-        viewModelScope.launch {
-            val result = repository.authenticate()
+            val result = authRepository.signUp(authRequest)
             authResult.postValue(result)
         }
     }
 
     fun getUser() {
+        println("VIEWMODEL-getUser()")
         viewModelScope.launch {
-            val result = repository.getUser()
+            val result = authRepository.getUser()
             if (result != null) {
                 user.postValue(result)
             }
         }
     }
 
-    fun getUserImage(userID: Int) {
+    fun getUserPicture(userID: Int) {
         viewModelScope.launch {
-            val response = repository.getUserPicture(userID)
+            val response = authRepository.getUserPicture(userID)
             if (response!!.isSuccessful) {
                 val source = response.body()
                 val inputStream = source?.byteStream()
@@ -87,10 +87,48 @@ class UserViewModel @Inject constructor(
 
     }
 
+    fun putUserPicture(imageFile: File) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = authRepository.putUserPicture(MultipartBody.Part.createFormData("image", imageFile.name, imageFile.asRequestBody("image/*".toMediaTypeOrNull())))
+            if (result is AuthResult.Authorized) {
+                getUserPicture(user.value!!.userID)
+            }
+        }
+    }
+
+    fun setNewPassword(map: Map<String, String>){
+        viewModelScope.launch {
+            val result = authRepository.setNewPassword(map)
+            if (result) {
+                isPasswordChanged.postValue(true)
+            }
+        }
+    }
+
+    fun resetPassword(email:String) {
+        viewModelScope.launch {
+            authRepository.resetPasswordEmail(email)
+        }
+    }
+
+    fun changeEmail(oldMail:String, newMail:String, password: String) {
+        viewModelScope.launch {
+            authRepository.changeEmail(oldMail, newMail, password)
+            val result = authRepository.authenticate()
+            authResult.postValue(result)
+        }
+    }
+
+    fun validateEmail(email:String) {
+        viewModelScope.launch {
+            authRepository.validateEmail(email)
+        }
+    }
+
     fun putUser(email: String, pass: String) {
         viewModelScope.launch {
-            if (repository.putUserInfo(AuthRequest(email,pass))) {
-                val result = repository.logIn(AuthRequest(email, pass))
+            if (authRepository.putUserInfo(AuthRequest(email,pass))) {
+                val result = authRepository.logIn(AuthRequest(email, pass))
                 if (result is AuthResult.Authorized) {
                     getUser()
                 }
@@ -98,19 +136,7 @@ class UserViewModel @Inject constructor(
         }
     }
 
-    fun putUserPicture(imageFile: File) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = repository.putUserPicture(MultipartBody.Part.createFormData("image", imageFile.name, imageFile.asRequestBody("image/*".toMediaTypeOrNull())))
-            if (result is AuthResult.Authorized) {
-                getUserImage(user.value!!.userID)
-            }
-        }
-    }
-
-
-
-
-    fun validateEmail(emailET: TextInputLayout, email: String): Boolean {
+    fun checkEmailSyntax(emailET: TextInputLayout, email: String): Boolean {
         val emailPattern = Regex(
             "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)\$"
         )
@@ -126,7 +152,7 @@ class UserViewModel @Inject constructor(
         }
     }
 
-    fun validatePassword(passET: TextInputLayout, password: String): Boolean {
+    fun checkPasswordSyntax(passET: TextInputLayout, password: String): Boolean {
         passET.error = null
         val minus = Regex("[a-z]")
         val mayus = Regex("[A-Z]")

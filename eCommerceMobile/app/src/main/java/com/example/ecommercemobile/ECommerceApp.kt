@@ -15,10 +15,10 @@ class ECommerceApp: Application() {
         super.onCreate()
         val config = CheckoutConfig(
             application = this,
-            clientId = "AddRC6syLdDnzCPsYP9rrifxTjzMK90SSQDn1QuphLe79cF6R26xET3xp6vUPLBw7IZhRNs5Uvl4S_Nm",
+            clientId = "AVjnwCEM4shxQzgAJZv37ZwTvmV87opjddOt8L61H9h1ZTLXeH5qav70bOPThoEKV7XnN6t2H2uCARxB",
             environment = Environment.SANDBOX,
             returnUrl = "com.example.ecommercemobile://paypalpay",
-            currencyCode = CurrencyCode.USD,
+            currencyCode = CurrencyCode.EUR,
             userAction = UserAction.PAY_NOW,
             settingsConfig = SettingsConfig(
 

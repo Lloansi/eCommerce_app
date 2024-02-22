@@ -3,17 +3,20 @@ package com.example.ecommercemobile.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecommercemobile.data.RelationRepository
+import com.example.ecommercemobile.data.repository.OrdersRepository
 import com.example.ecommercemobile.data.model.Cart
+import com.example.ecommercemobile.data.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val repository: RelationRepository): ViewModel() {
+    private val repository: OrdersRepository
+): ViewModel() {
 
     var vmCart = MutableLiveData<Cart?>()
+
 
     // If the user has a cart, get it. Otherwise, create a new cart
     fun getCart(userID: Int) {
@@ -61,4 +64,7 @@ class CartViewModel @Inject constructor(
             }
         }
     }
+
+
+
 }
