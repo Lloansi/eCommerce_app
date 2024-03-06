@@ -76,11 +76,8 @@
 ## 📝Feedback
 For any kind of feedback, you can reach out to us at ecommerceAppITB@gmail.com ✉️
 
-
-## 📜License
-[![MIT License](https://img.shields.io/badge/Llic%C3%A8ncia-MIT-green)](https://choosealicense.com/licenses/mit/)
-This software is licensed under the [MIT](https://github.com/nhn/tui.editor/blob/master/LICENSE) ©.
-
+## 📜 License
+This project is licensed under the [Usage License](LICENSE.txt).
 
 ## 🧑🏽Authors
 - [@Ivan Martinez Cañero](https://github.com/IvanCaEz)
